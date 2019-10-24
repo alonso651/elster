@@ -190,16 +190,84 @@ void ElsterA100C::good_packet()
     //   Serial.print(data[i]);
     //   Serial.print(" ");
     // }
-    Serial.print("product (info): ");
-    Serial.println(info->product)
-    Serial.print("product (data): ");
-    //Serial.println(data[])
-    for (int i = 0; i < 11; ++i)
-    {
-      Serial.print(data[i]);
-    }
-    // handler(bcdtol(info->product, 12));
+    Serial.print("product: ");
+    Serial.println(info->product);
+
+    Serial.print("firmware: ");
+    Serial.println(info->firmware);
+
+    Serial.print("mfg_serial (b): ");
+    Serial.println(info->product);
+
+    Serial.print("config_serial (b): ");
+    Serial.println(info->product);
+
+    Serial.print("utility_serial: ");
+    Serial.println(info->utility_serial);
+
+    Serial.print("meter_definition (bit field): ");
+    handler(bcdtol(info->meter_definition, 3));
+
+    Serial.print("rate_1_import_kWh: ");
     handler(bcdtol(info->rate_1_import_kWh, 5));
+
+    Serial.print("rate_1_reserved: ");
+    handler(bcdtol(info->rate_1_reserved, 5));
+
+    Serial.print("rate_1_reverse_kWh: ");
+    handler(bcdtol(info->rate_1_reverse_kWh, 5));
+
+    Serial.print("rate_2_import_kWh: ");
+    handler(bcdtol(info->rate_2_import_kWh, 5));
+
+    Serial.print("rate_2_reserved_kWh: ");
+    handler(bcdtol(info->rate_2_reserved_kWh, 5));
+    
+    Serial.print("rate_2_reverse_kWh: ");
+    handler(bcdtol(info->rate_2_reverse_kWh, 5));
+    
+    Serial.print("reserved_01 (b): ");
+    handler(bcdtol(info->reserved_01, 1));
+
+    Serial.print("status (bit field): ");
+    handler(bcdtol(info->status, 1));
+    
+    Serial.print("error (bit field): ");
+    handler(bcdtol(info->error, 1));
+
+    Serial.print("anti_creep: ");
+    handler(bcdtol(info->anti_creep, 3));
+
+    Serial.print("rate_1_time: ");
+    handler(bcdtol(info->rate_1_time, 3));
+
+    Serial.print("rate_2_time: ");
+    handler(bcdtol(info->rate_2_time, 3));
+
+    Serial.print("power_up: ");
+    handler(bcdtol(info->power_up, 3));
+
+    Serial.print("power_fail (b): ");
+    handler(bcdtol(info->power_fail, 2));
+
+    Serial.print("watchdog (b): ");
+    handler(bcdtol(info->watchdog, 1));
+
+    Serial.print("reverse_warning (b): ");
+    handler(bcdtol(info->reverse_warning, 1));
+
+    Serial.print("reserved_02 (b): ");
+    handler(bcdtol(info->reserved_02, 10));
+
+
+    // Serial.print("product (data): ");
+    // //Serial.println(data[])
+    // for (int i = 0; i < 11; ++i)
+    // {
+    //   Serial.print(data[i]);
+    // }
+    // // handler(bcdtol(info->product, 12));
+    // handler(bcdtol(info->rate_1_import_kWh, 5));
 }
 
 unsigned char ElsterA100C::bcc(unsigned char cs, const unsigned char* data, int count)
