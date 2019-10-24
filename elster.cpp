@@ -184,7 +184,8 @@ void ElsterA100C::good_packet()
 {
     struct info* info = (struct info*) data;        
     // handler(bcdtol(info->rate_1_import_kWh, 5));
-    handler(bcdtol(info->product, 12));
+    handler(bcdtol(info->meter_definition, 3));
+    // handler(bcdtol(info->product, 12));
 }
 
 unsigned char ElsterA100C::bcc(unsigned char cs, const unsigned char* data, int count)
