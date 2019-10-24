@@ -180,9 +180,15 @@ int ElsterA100C::good_cs(unsigned char cs, unsigned char check)
   return bits < 2;
 }
 
+byte bcdToDec(byte val){
+  return((val/16*10) + (val%16));
+}
+
 void ElsterA100C::good_packet()
 {
     struct info* info = (struct info*) data;        
+    byte aux;      
+    char binario [9];
     //
     //handler(bcdtol(info->rate_1_reserved, 5));
     // for (int i = 0; i < sizeof[data]; ++i)
@@ -196,17 +202,33 @@ void ElsterA100C::good_packet()
     Serial.print("firmware: ");
     Serial.println(info->firmware);
 
+    aux = bcdToDec(info->mfg_serial);
+    itoa(aux,binario,2);
+    char* string = binario + 1;
     Serial.print("mfg_serial (b): ");
-    Serial.println(info->product);
+    Serial.println(string);
+    aux = 0;
+    // binario = {0, 0, 0, 0, 0, 0, 0, 0};
 
+    aux = bcdToDec(info->config_serial);
+    itoa(aux,binario,2);
+    char* string1 = binario + 1;
     Serial.print("config_serial (b): ");
-    Serial.println(info->product);
+    Serial.println(string1);
+    aux = 0;
+    // binario = {0, 0, 0, 0, 0, 0, 0, 0};
+
 
     Serial.print("utility_serial: ");
     Serial.println(info->utility_serial);
 
+    aux = bcdToDec(info->meter_definition);
+    itoa(aux,binario,2);
+    char* string2 = binario + 1;
     Serial.print("meter_definition (bit field): ");
-    handler(bcdtol(info->meter_definition, 3));
+    Serial.println(string2);
+    aux = 0;
+    // binario = {0, 0, 0, 0, 0, 0, 0, 0};
 
     Serial.print("rate_1_import_kWh: ");
     handler(bcdtol(info->rate_1_import_kWh, 5));
@@ -226,14 +248,29 @@ void ElsterA100C::good_packet()
     Serial.print("rate_2_reverse_kWh: ");
     handler(bcdtol(info->rate_2_reverse_kWh, 5));
     
+    aux = bcdToDec(info->reserved_01);
+    itoa(aux,binario,2);
+    char* string3 = binario + 1;
     Serial.print("reserved_01 (b): ");
-    handler(bcdtol(info->reserved_01, 1));
+    Serial.println(string3);
+    aux = 0;
+    // binario = {0, 0, 0, 0, 0, 0, 0, 0};
 
+    aux = bcdToDec(info->status);
+    itoa(aux,binario,2);
+    char* string4 = binario + 1;
     Serial.print("status (bit field): ");
-    handler(bcdtol(info->status, 1));
+    Serial.println(string4);
+    aux = 0;
+    // binario = {0, 0, 0, 0, 0, 0, 0, 0};
     
+    aux = bcdToDec(info->error);
+    itoa(aux,binario,2);
+    char* string5 = binario + 1;
     Serial.print("error (bit field): ");
-    handler(bcdtol(info->error, 1));
+    Serial.println(string5);
+    aux = 0;
+    // binario = {0, 0, 0, 0, 0, 0, 0, 0};
 
     Serial.print("anti_creep: ");
     handler(bcdtol(info->anti_creep, 3));
@@ -247,17 +284,37 @@ void ElsterA100C::good_packet()
     Serial.print("power_up: ");
     handler(bcdtol(info->power_up, 3));
 
+    aux = bcdToDec(info->power_fail);
+    itoa(aux,binario,2);
+    char* string6 = binario + 1;
     Serial.print("power_fail (b): ");
-    handler(bcdtol(info->power_fail, 2));
+    Serial.println(string6);
+    aux = 0;
+    // binario = {0, 0, 0, 0, 0, 0, 0, 0};
 
+    aux = bcdToDec(info->watchdog);
+    itoa(aux,binario,2);
+    char* string7 = binario + 1;
     Serial.print("watchdog (b): ");
-    handler(bcdtol(info->watchdog, 1));
+    Serial.println(string7);
+    aux = 0;
+    // binario = {0, 0, 0, 0, 0, 0, 0, 0};
 
+    aux = bcdToDec(info->reverse_warning);
+    itoa(aux,binario,2);
+    char* string8 = binario + 1;
     Serial.print("reverse_warning (b): ");
-    handler(bcdtol(info->reverse_warning, 1));
+    Serial.println(string8);
+    aux = 0;
+    // binario = {0, 0, 0, 0, 0, 0, 0, 0};
 
+    aux = bcdToDec(info->reserved_02);
+    itoa(aux,binario,2);
+    char* string9 = binario + 1;
     Serial.print("reserved_02 (b): ");
-    handler(bcdtol(info->reserved_02, 10));
+    Serial.println(string9);
+    aux = 0;
+    // binario = {0, 0, 0, 0, 0, 0, 0, 0};
 
 
     // Serial.print("product (data): ");
