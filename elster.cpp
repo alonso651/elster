@@ -183,14 +183,23 @@ int ElsterA100C::good_cs(unsigned char cs, unsigned char check)
 void ElsterA100C::good_packet()
 {
     struct info* info = (struct info*) data;        
-    handler(bcdtol(info->rate_1_import_kWh, 5));
-    handler(bcdtol(info->rate_1_reserved, 5));
-    for (int i = 0; i < sizeof[data]; ++i)
+    //
+    //handler(bcdtol(info->rate_1_reserved, 5));
+    // for (int i = 0; i < sizeof[data]; ++i)
+    // {
+    //   Serial.print(data[i]);
+    //   Serial.print(" ");
+    // }
+    Serial.print("product (info): ");
+    Serial.println(info->product)
+    Serial.print("product (data): ");
+    //Serial.println(data[])
+    for (int i = 0; i < 11; ++i)
     {
       Serial.print(data[i]);
-      Serial.print(" ");
     }
     // handler(bcdtol(info->product, 12));
+    handler(bcdtol(info->rate_1_import_kWh, 5));
 }
 
 unsigned char ElsterA100C::bcc(unsigned char cs, const unsigned char* data, int count)
