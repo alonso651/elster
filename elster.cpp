@@ -162,13 +162,13 @@ int ElsterA100C::good_cs(unsigned char cs, unsigned char check)
   // systematic 1-bit errors which I can't track down.      
 
   
-  Serial.print("bcc=");
-  Serial.print(check, HEX);
-  Serial.print(" cs=");
-  Serial.print(cs, HEX);
-  Serial.print(" xor=");
-  Serial.print(cs ^ check, HEX);
-  Serial.print("\r\n");
+  // Serial.print("bcc=");
+  // Serial.print(check, HEX);
+  // Serial.print(" cs=");
+  // Serial.print(cs, HEX);
+  // Serial.print(" xor=");
+  // Serial.print(cs ^ check, HEX);
+  // Serial.print("\r\n");
   
 
   int bits = 0;
