@@ -161,7 +161,7 @@ int ElsterA100C::good_cs(unsigned char cs, unsigned char check)
   // note : should be 'cs == check', but I'm seeing
   // systematic 1-bit errors which I can't track down.      
 
-  /*
+  
   Serial.print("bcc=");
   Serial.print(check, HEX);
   Serial.print(" cs=");
@@ -169,7 +169,7 @@ int ElsterA100C::good_cs(unsigned char cs, unsigned char check)
   Serial.print(" xor=");
   Serial.print(cs ^ check, HEX);
   Serial.print("\r\n");
-  */
+  
 
   int bits = 0;
   int delta = cs ^ check;
@@ -183,8 +183,13 @@ int ElsterA100C::good_cs(unsigned char cs, unsigned char check)
 void ElsterA100C::good_packet()
 {
     struct info* info = (struct info*) data;        
-    // handler(bcdtol(info->rate_1_import_kWh, 5));
+    handler(bcdtol(info->rate_1_import_kWh, 5));
     handler(bcdtol(info->rate_1_reserved, 5));
+    for (int i = 0; i < sizeof[data]; ++i)
+    {
+      Serial.print(data[i]);
+      Serial.print(" ");
+    }
     // handler(bcdtol(info->product, 12));
 }
 
