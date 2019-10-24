@@ -204,19 +204,27 @@ void ElsterA100C::good_packet()
 
     aux = bcdToDec(info->mfg_serial);
     itoa(aux,binario,2);
-    char* string = binario + 1;
+    char* string = binario;
     Serial.print("mfg_serial (b): ");
     Serial.println(string);
     aux = 0;
     // binario = {0, 0, 0, 0, 0, 0, 0, 0};
+    for (int i = 0; i < sizeof(binario); ++i)
+    {
+    	binario[i] = 0;
+    }
 
     aux = bcdToDec(info->config_serial);
     itoa(aux,binario,2);
-    char* string1 = binario + 1;
+    char* string1 = binario;
     Serial.print("config_serial (b): ");
     Serial.println(string1);
     aux = 0;
     // binario = {0, 0, 0, 0, 0, 0, 0, 0};
+    for (int i = 0; i < sizeof(binario); ++i)
+    {
+    	binario[i] = 0;
+    }
 
 
     Serial.print("utility_serial: ");
@@ -224,11 +232,15 @@ void ElsterA100C::good_packet()
 
     aux = bcdToDec(info->meter_definition);
     itoa(aux,binario,2);
-    char* string2 = binario + 1;
+    char* string2 = binario;
     Serial.print("meter_definition (bit field): ");
     Serial.println(string2);
     aux = 0;
     // binario = {0, 0, 0, 0, 0, 0, 0, 0};
+    for (int i = 0; i < sizeof(binario); ++i)
+    {
+    	binario[i] = 0;
+    }
 
     Serial.print("rate_1_import_kWh: ");
     handler(bcdtol(info->rate_1_import_kWh, 5));
@@ -250,27 +262,39 @@ void ElsterA100C::good_packet()
     
     aux = bcdToDec(info->reserved_01);
     itoa(aux,binario,2);
-    char* string3 = binario + 1;
+    char* string3 = binario;
     Serial.print("reserved_01 (b): ");
     Serial.println(string3);
     aux = 0;
     // binario = {0, 0, 0, 0, 0, 0, 0, 0};
+    for (int i = 0; i < sizeof(binario); ++i)
+    {
+    	binario[i] = 0;
+    }
 
     aux = bcdToDec(info->status);
     itoa(aux,binario,2);
-    char* string4 = binario + 1;
+    char* string4 = binario;
     Serial.print("status (bit field): ");
     Serial.println(string4);
     aux = 0;
     // binario = {0, 0, 0, 0, 0, 0, 0, 0};
-    
+    for (int i = 0; i < sizeof(binario); ++i)
+    {
+    	binario[i] = 0;
+    }
+
     aux = bcdToDec(info->error);
     itoa(aux,binario,2);
-    char* string5 = binario + 1;
+    char* string5 = binario;
     Serial.print("error (bit field): ");
     Serial.println(string5);
     aux = 0;
     // binario = {0, 0, 0, 0, 0, 0, 0, 0};
+    for (int i = 0; i < sizeof(binario); ++i)
+    {
+    	binario[i] = 0;
+    }
 
     Serial.print("anti_creep: ");
     handler(bcdtol(info->anti_creep, 3));
@@ -286,45 +310,51 @@ void ElsterA100C::good_packet()
 
     aux = bcdToDec(info->power_fail);
     itoa(aux,binario,2);
-    char* string6 = binario + 1;
+    char* string6 = binario;
     Serial.print("power_fail (b): ");
     Serial.println(string6);
     aux = 0;
     // binario = {0, 0, 0, 0, 0, 0, 0, 0};
+    for (int i = 0; i < sizeof(binario); ++i)
+    {
+    	binario[i] = 0;
+    }
 
     aux = bcdToDec(info->watchdog);
     itoa(aux,binario,2);
-    char* string7 = binario + 1;
+    char* string7 = binario;
     Serial.print("watchdog (b): ");
     Serial.println(string7);
     aux = 0;
     // binario = {0, 0, 0, 0, 0, 0, 0, 0};
+    for (int i = 0; i < sizeof(binario); ++i)
+    {
+    	binario[i] = 0;
+    }
 
     aux = bcdToDec(info->reverse_warning);
     itoa(aux,binario,2);
-    char* string8 = binario + 1;
+    char* string8 = binario;
     Serial.print("reverse_warning (b): ");
     Serial.println(string8);
     aux = 0;
     // binario = {0, 0, 0, 0, 0, 0, 0, 0};
+    for (int i = 0; i < sizeof(binario); ++i)
+    {
+    	binario[i] = 0;
+    }
 
     aux = bcdToDec(info->reserved_02);
     itoa(aux,binario,2);
-    char* string9 = binario + 1;
+    char* string9 = binario;
     Serial.print("reserved_02 (b): ");
     Serial.println(string9);
     aux = 0;
     // binario = {0, 0, 0, 0, 0, 0, 0, 0};
-
-
-    // Serial.print("product (data): ");
-    // //Serial.println(data[])
-    // for (int i = 0; i < 11; ++i)
-    // {
-    //   Serial.print(data[i]);
-    // }
-    // // handler(bcdtol(info->product, 12));
-    // handler(bcdtol(info->rate_1_import_kWh, 5));
+    for (int i = 0; i < sizeof(binario); ++i)
+    {
+    	binario[i] = 0;
+    }
 }
 
 unsigned char ElsterA100C::bcc(unsigned char cs, const unsigned char* data, int count)
